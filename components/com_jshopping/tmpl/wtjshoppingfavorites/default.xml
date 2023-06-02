@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="WT Jshopping favorites">
+		<message>
+			
+		</message>
+	</layout>
+	<fields name="params">
+		<fieldset name="basic">
+			<field type="text" name="clear_favorites_btn_css_class" label="Empty favorites button CSS class" default="btn btn-primary"/>
+		</fieldset>
+	</fields>
+</metadata>

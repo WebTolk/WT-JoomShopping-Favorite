@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension type="package" method="upgrade">
+	<name>WT JoomShopping Favorites</name>
+	<author>Sergey Tolkachyov</author>
+	<creationDate>01/03/2023</creationDate>
+	<packagename>wt_jshopping_favorites</packagename>
+	<version>1.3.5</version>
+	<url>https://web-tolk.ru/</url>
+	<packager>Sergey Tolkachyov</packager>
+	<packagerurl>https://web-tolk.ru/</packagerurl>
+	<description><![CDATA[	<h2>Favorite products for JoomShopping</h2> ]]></description>
+	<license>GNU GPL 3.0</license>
+	<scriptfile>pkg_script.php</scriptfile>
+	<languages>
+		<language tag="en-GB">language/en-GB/en-GB.pkg_wt_jshopping_favorites.sys.ini</language>
+		<language tag="ru-RU">language/ru-RU/ru-RU.pkg_wt_jshopping_favorites.sys.ini</language>
+	</languages>
+	<files>
+	   <file type="plugin">plg_wtjshoppingfavorites.zip</file>
+	   <file type="module" client="site">mod_wtjshoppingfavorites.zip</file>
+	   <file type="file">wtjshoppingfavorites_components_view.zip</file>
+	   <file type="file">wtjshoppingfavorites_jshopping_templates.zip</file>
+	   <file type="file">wtproducts_jshooping_model.zip</file>
+	</files>
+	<updateservers>
+			<server type="extension" name="WebTolkUpdateServer">https://web-tolk.ru/component/swjprojects/jupdate.html?element=wt_jshopping_favorites</server>
+	</updateservers>
+</extension>

@@ -1,0 +1,9 @@
+.wt_jshop_favorite_module a {font-size:14px;}
+.wt_jshop_favorite_module a .text{border-bottom: 1px dashed #fff; padding-bottom:3px;}
+.wt_jshop_favorite_module.active a, .wt_jshop_favorite_module a:hover{}
+.wt_jshop_favorite_module a .icon{width: 16px;height: 16px;display:inline-block;margin-right: 4px;position: relative;top: 4px;}
+.wt_jshop_favorite_module.active a .icon{background-position: 0px 0px;}
+.wt_jshop_favorite_module .num {margin-right: 5px; min-width: 48px; position:relative;padding: 6px 10px; line-height:14px;}
+.wt_jshop_favorite_module .num .digit{color: #fff; position:absolute; top:0px; right:0px; border-radius: 50%; background-color:#0FA2E6; font-size:9px;padding:0px 5px;}
+.wt_jshop_favorite_module.active .num .digit{border-color: #e4003a;background: #e4003a;color: #fff;}
+[data-favorite].selected {color:#fff; background:red;}
