@@ -47,7 +47,7 @@ if($params->get('use_module_css',1) == 1){
 
 
 $app         = Factory::getApplication();
-$product_ids = unserialize($app->input->cookie->get('wtjshoppingfavorites', null, $filter = 'string'));
+$product_ids = unserialize($app->getInput()->cookie->get('wtjshoppingfavorites', null, $filter = 'string'));
 if ($product_ids == false)
 {
 	unset($product_ids);

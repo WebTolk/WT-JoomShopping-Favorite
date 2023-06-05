@@ -2,7 +2,7 @@
 /**
  * WT JoomShopping Favorites is an alternative wish list (favorite products) for JoomShopping based on coockies.
  * @package     WT JoomShopping Favorite
- * @version     1.3.4
+ * @version     1.3.3
  * @Author      Sergey Tolkachyov, https://web-tolk.ru
  * @copyright   Copyright (C) 2022 Sergey Tolkachyov
  * @license     GNU/GPL 3.0
@@ -28,16 +28,17 @@ class WtjshoppingfavoritesController extends BaseController{
 	public function view()
 		{
 			$jshopConfig = \JSFactory::getConfig();
-			$app = Factory::getApplication();
-			$lang        = $app->getLanguage();
+			$lang        = Factory::getApplication()->getLanguage();
 			$lang->load('plg_jshoppingproducts_wtjshoppingfavorites', JPATH_ADMINISTRATOR, null, true);
 			PluginHelper::importPlugin('jshoppingproducts');
-			$app->triggerEvent('onBeforeDisplayWtjshoppingfavorites', array(&$this));
+			Factory::getApplication()->triggerEvent('onBeforeDisplayWtjshoppingfavorites', array(&$this));
 			$view_name   = "wtjshoppingfavorites";
 			$view_config = array("template_path" => JPATH_COMPONENT . "/templates/" . $jshopConfig->template . "/" . $view_name);
 			$view        = $this->getView($view_name, \JSHelper::getDocumentType(), '', $view_config);
 			$view->setLayout("wtjshoppingfavorites");
 			$view->config = $jshopConfig;
+			$app = Factory::getApplication();
+
 			$params     = $app->getParams();
 			$menuParams = new Registry();
 			$menu       = $app->getMenu()->getActive();
@@ -48,7 +49,7 @@ class WtjshoppingfavoritesController extends BaseController{
 			$mergedParams = clone $menuParams;
 			$mergedParams->merge($params);
 
-			$product_ids = unserialize($app->input->cookie->get('wtjshoppingfavorites', null, 'string'));
+			$product_ids = unserialize($app->getInput()->cookie->get('wtjshoppingfavorites', null, 'string'));
 			$product_list = new \stdClass();
 				if(!empty($product_ids)){
 
@@ -75,12 +76,10 @@ class WtjshoppingfavoritesController extends BaseController{
 					$product_list->products = [];
 				}
 				$view->clear_favorites_btn_css_class = $mergedParams->get('clear_favorites_btn_css_class');
-			\JSHelper::setMetaData(Text::_('PLG_WTJSHOPPINGFAVORITES'),
-				'',
-				(!empty($mergedParams->get('menu-meta_description')) ? $mergedParams->get('menu-meta_description') : $mergedParams->get('page_description')),
-				$mergedParams);
-			$app->triggerEvent('onBeforeDisplayProductListView',array(&$view, &$product_list));
-			$app->triggerEvent('onBeforeDisplaywtjshoppingfavoritesView',array(&$view, &$product_list));
+
+			\JSHelper::setMetaData(Text::_('PLG_WTJSHOPPINGFAVORITES'), '', $mergedParams->get('menu-meta_description'), $mergedParams);
+			Factory::getApplication()->triggerEvent('onBeforeDisplayProductListView',array(&$view, &$product_list));
+			Factory::getApplication()->triggerEvent('onBeforeDisplaywtjshoppingfavoritesView',array(&$view, &$product_list));
 			$view->display();
     }
 

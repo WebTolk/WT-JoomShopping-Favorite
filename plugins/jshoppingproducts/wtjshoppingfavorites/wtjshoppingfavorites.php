@@ -136,7 +136,7 @@ class plgJshoppingproductsWtjshoppingfavorites extends CMSPlugin
 		$product_id = $app->getInput()->post->get("product_id", "", "int");
 		$cookie     = $app->getInput()->post->get("cookie", "", "raw");
 
-		//$app->input->cookie->set('wt_jshopping_last_seen_products', $cookie, $cookie_period,'/');
+		//$app->getInput()->cookie->set('wt_jshopping_last_seen_products', $cookie, $cookie_period,'/');
 		$product_decode = unserialize(stripcslashes($cookie));
 		if (!isset($cookie))
 		{
