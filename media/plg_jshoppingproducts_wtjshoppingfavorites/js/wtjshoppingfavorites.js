@@ -19,8 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 url: Joomla.getOptions('system.paths', '').root + '/index.php',
                 method: 'POST',
                 headers: {
-                    'Cache-Control' : 'no-cache',
-                    'Your-custom-header' : 'custom-header-value'
+                    'Cache-Control' : 'no-cache'
                 },
                 data: {
                     'option': 'com_ajax',
@@ -45,30 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             });
-
-
-            let response  = await fetch(Joomla.getOptions('system.paths', '').root + '/index.php?option=com_ajax&plugin=wt_content_like&group=content&format=raw&article_id=' + articleId);
-
-            if (response.ok){
-                let json = await response.json();
-
-                if (json !== '') {
-                    if (json.success === 1) {
-                        let rating_count_span = document.getElementById('wt_content_like_rating_count_' + articleId);
-                        rating_count_span.removeAttribute('style');
-                        rating_count_span.innerHTML = json.rating;
-
-                        let rating_message_span = document.getElementById('wt_content_like_meesage_' + articleId);
-                        rating_message_span.innerHTML = json.message;
-                        rating_message_span.setAttribute('style','color:#008000;');
-
-                    } else {
-                        let rating_message_span = document.getElementById('wt_content_like_meesage_' + articleId);
-                        rating_message_span.innerHTML = json.message;
-                        rating_message_span.setAttribute('style','color:#FF0000;');
-                    }
-                }
-            }
         }, false);//addEventListener
     });
 
