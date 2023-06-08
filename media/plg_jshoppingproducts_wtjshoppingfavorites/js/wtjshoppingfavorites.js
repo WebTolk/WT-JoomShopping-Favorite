@@ -11,36 +11,21 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     let elements = document.querySelectorAll('[data-favorite]');
+
     Array.prototype.forEach.call(elements, function (el, i) {
         el.addEventListener('click', async function () {
             let product_id = el.getAttribute('data-favorite');
 
             Joomla.request({
-                url: Joomla.getOptions('system.paths', '').root + '/index.php',
-                method: 'POST',
-                headers: {
-                    'Cache-Control' : 'no-cache'
-                },
-                data: {
-                    'option': 'com_ajax',
-                    'plugin': 'wtjshoppingfavorites',
-                    'group': 'jshoppingproducts',
-                    'format': 'raw',
-                    'product_id': product_id,
-                    'cookie': decodeURIComponent(getCookie('wtjshoppingfavorites'))
-                },
-                onSuccess: function (response, xhr){
+                url: Joomla.getOptions('system.paths', '').root + '/index.php?option=com_ajax&plugin=wtjshoppingfavorites&group=jshoppingproducts&format=json&product_id=' + product_id,
+                onSuccess: function (response, xhr) {
                     // Тут делаем что-то с результатами
-                    // Проверяем пришли ли ответы
-                    if (response !== ''){
+                    // Проверяем, пришли ли ответы
+                    if (response !== '') {
                         let favorite = JSON.parse(response);
-                        let data = encodeURIComponent(favorite[0]);
-                        let wt_jshopping_favorites_script_potions = Joomla.getOptions('wt_jshopping_favorites_script_potions');
-                        let cookie_max_age = wt_jshopping_favorites_script_potions['cookie_period'];
-                        document.cookie = "wtjshoppingfavorites=" + data + "; path=/; domain=" + location.hostname + "; max-age=" + cookie_max_age;
-                        changeModuleDigit(favorite, product_id);
+                        changeModuleDigit(favorite.data[0].added, product_id);
                     } else {
-                        console.log(response);
+                        console.error(response);
                     }
                 }
             });
@@ -49,8 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     let btn_favorite_empty_list = document.getElementById('wt-jshopping-favorite-empty-list');
-    if(btn_favorite_empty_list)
-    {
+    if (btn_favorite_empty_list) {
         btn_favorite_empty_list.addEventListener('click', () => {
             let data = encodeURIComponent("");
 
@@ -69,99 +53,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-
-// jQuery(document).ready(function () {
-//
-//     jQuery("[data-favorite]").click(function () {
-//         event.preventDefault();
-//         let product_id = jQuery(this).attr("data-favorite");
-//         jQuery.ajax({
-//             type: "POST", url: location.protocol + '//' + location.hostname, data: ({
-//                 'option': 'com_ajax',
-//                 'plugin': 'wtjshoppingfavorites',
-//                 'group': 'jshoppingproducts',
-//                 'format': 'raw',
-//                 'product_id': product_id,
-//                 'cookie': decodeURIComponent(getCookie('wtjshoppingfavorites'))
-//             }), success: function (favorite) {
-//                 favorite = JSON.parse(favorite);
-//                 let data = encodeURIComponent(favorite[0]);
-//                 let wt_jshopping_favorites_script_potions = Joomla.getOptions('wt_jshopping_favorites_script_potions');
-//                 let cookie_max_age = wt_jshopping_favorites_script_potions['cookie_period'];
-//                 document.cookie = "wtjshoppingfavorites=" + data + "; path=/; domain=" + location.hostname + "; max-age=" + cookie_max_age;
-//                 changeModuleDigit(favorite, product_id);
-//             }, fail: function (favorite, data) {
-//                 console.log(favorite);
-//             }
-//         });
-//     });
-//
-//
-//     jQuery('#wt-jshopping-favorite-empty-list').click(function () {
-//         let data = encodeURIComponent("");
-//
-//         document.cookie = "wtjshoppingfavorites=" + data + ";max-age=0; path=/; domain=" + location.hostname;
-//         if ('body.wtjshoppingfavoritesView') {
-//             jQuery("[data-wt-jshop-favorite]").detach();
-//         }
-//         jQuery(".wt_jshop_favorite_module .digit").html('').removeClass('active');
-//
-//     });
-//
-// });
-
-function getCookie(cname) {
-    let name = cname + "=";
-    // let decodedCookie = document.cookie;
-    let ca = document.cookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) === ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) === 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
-
 /**
  *
  * @param favorite    json response from ajax request
  * @param product_id JoomShopping product id
  */
 function changeModuleDigit(favorite, product_id) {
-    let digit = document.querySelector('.wt_jshop_favorite_module .digit');
-    let digit_int = parseInt(digit);
-    let favorite_module = document.querySelector('.wt_jshop_favorite_module');
-    let favorite_button = document.getElementById('favorite_button' + product_id);
+    let digits = document.querySelectorAll('.wt_jshop_favorite_module .digit');
 
-    if (favorite["added"] === true) {
+    digits.forEach((digit) => {
+        let digit_int = parseInt(digit.textContent);
+        let favorite_module = document.querySelector('.wt_jshop_favorite_module');
+        let favorite_button = document.getElementById('favorite_button' + product_id);
 
-        digit_int++;
-        digit.innerHTML = digit_int;
+        if (favorite === true) {
 
-        if (digit_int > 0) {
-            favorite_module.classList.add('active');
+            digit_int++;
+            digit.innerHTML = digit_int;
+
+            if (digit_int > 0) {
+                favorite_module.classList.add('active');
+            }
+
+            favorite_button.classList.add('selected');
+
+        } else {
+
+            digit_int--;
+            digit.innerHTML = digit_int;
+
+            if (digit === 0) {
+
+                favorite_module.classList.remove('active');
+            }
+            favorite_button.classList.remove('selected');
+            let body = document.querySelector('body');
+            if (body.classList.contains('wtjshoppingfavoritesView')) {
+                let el = document.querySelector("[data-wt-jshop-favorite='" + product_id + "']");
+                el.remove();
+            }
         }
+    });
 
-        favorite_button.classList.add('selected');
-
-    } else {
-
-        digit_int--;
-        digit.innerHTML = digit_int;
-
-        if (digit === 0) {
-
-            favorite_module.classList.remove('active');
-        }
-        favorite_button.classList.remove('selected');
-        if (body.classList.contains('wtjshoppingfavoritesView')) {
-            el = document.querySelector("[data-wt-jshop-favorite=" + product_id + "]");
-            el.remove();
-        }
-    }
 }
 

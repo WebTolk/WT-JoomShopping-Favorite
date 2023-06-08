@@ -1,28 +1,29 @@
 <?xml version="1.0"?>
-<extension type="plugin" method="upgrade" group="jshoppingproducts">
+<extension type="plugin" version="4.0" method="upgrade" group="jshoppingproducts">
     <name>Jshoppingproducts - WT JoomShopping Favorites</name>
     <author>Sergey Tolkachyov</author>
     <authorEmail>info@web-tolk.ru</authorEmail>
     <authorUrl>https://web-tolk.ru/</authorUrl>
-	<creationDate>01/03/2023</creationDate>
+	<creationDate>08/06/2023</creationDate>
     <copyright>Sergey Tolkachyov</copyright>
     <license>GNU GPL 3.0</license>
-    <version>1.3.5</version>
+    <version>1.3.3</version>
     <description>PLG_WTJSHOPPINGFAVORITES_DESC</description>
+    <namespace path="src">Joomla\Plugin\Jshoppingproducts\Wtjshoppingfavorites</namespace>
     <files>
-        <filename plugin="wtjshoppingfavorites">wtjshoppingfavorites.php</filename>
+        <folder plugin="wtjshoppingfavorites">src</folder>
+        <folder>services</folder>
 		<folder>media</folder>
 		<folder>language</folder>
-		<folder>fields</folder>
     </files>
 	<media folder="media" destination="plg_jshoppingproducts_wtjshoppingfavorites">
 		<folder>js</folder>
 	</media>
 	 <languages>
-        <language tag="en-GB">language/en-GB/en-GB.plg_jshoppingproducts_wtjshoppingfavorites.ini</language>
-        <language tag="en-GB">language/en-GB/en-GB.plg_jshoppingproducts_wtjshoppingfavorites.sys.ini</language>
-        <language tag="ru-RU">language/ru-RU/ru-RU.plg_jshoppingproducts_wtjshoppingfavorites.ini</language>
-        <language tag="ru-RU">language/ru-RU/ru-RU.plg_jshoppingproducts_wtjshoppingfavorites.sys.ini</language>
+        <language tag="en-GB">language/en-GB/plg_jshoppingproducts_wtjshoppingfavorites.ini</language>
+        <language tag="en-GB">language/en-GB/plg_jshoppingproducts_wtjshoppingfavorites.sys.ini</language>
+        <language tag="ru-RU">language/ru-RU/plg_jshoppingproducts_wtjshoppingfavorites.ini</language>
+        <language tag="ru-RU">language/ru-RU/plg_jshoppingproducts_wtjshoppingfavorites.sys.ini</language>
     </languages>
     <config>
         <fields name="params">
