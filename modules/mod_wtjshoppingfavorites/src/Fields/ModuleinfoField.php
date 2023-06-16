@@ -1,28 +1,24 @@
 <?php
 /**
- * @package       WebTolk plugin info field
- * @version       1.0.0
- * @Author        Sergey Tolkachyov, https://web-tolk.ru
- * @copyright     Copyright (C) 2020 Sergey Tolkachyov
- * @license       GNU/GPL http://www.gnu.org/licenses/gpl-2.0.html
- * @since         1.0.0
+ * @package     Wt Quick Links
+ * @copyright   Copyright (C) 2021-2023 Sergey Tolkachyov. All rights reserved.
+ * @author      Sergey Tolkachyov - https://web-tolk.ru
+ * @link 		https://web-tolk.ru
+ * @version 	2.1.0
+ * @license     GNU General Public License version 2 or later
  */
-
+namespace Joomla\Module\Wtjshoppingfavorites\Site\Fields;
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Form\Field\SpacerField;
 use Joomla\CMS\Form\FormHelper;
-use Joomla\CMS\HTML\HTMLHelper;
-use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Factory;
-use Joomla\Registry\Registry;
 
-FormHelper::loadFieldClass('spacer');
-
-class JFormFieldModuleinfo extends JFormFieldSpacer
+class ModuleinfoField extends SpacerField
 {
 
-	protected $type = 'moduleinfo';
+	protected $type = 'Moduleinfo';
 
 	/**
 	 * Method to get the field input markup for a spacer.
@@ -58,12 +54,8 @@ class JFormFieldModuleinfo extends JFormFieldSpacer
 	{
 		$data   = $this->form->getData();
 		$module = $data->get('module');
-		$wa    = Factory::getApplication()->getDocument()->getWebAssetManager();
-		$wa->addInlineStyle("
-			.plugin-info-img{
-			    margin-right:auto;
-			    max-width: 100%;
-			}
+		$doc    = Factory::getApplication()->getDocument();
+		$doc->addStyleDeclaration("
 			.plugin-info-img-svg:hover * {
 				cursor:pointer;
 			}

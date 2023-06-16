@@ -36,18 +36,26 @@ document.addEventListener('DOMContentLoaded', () => {
     let btn_favorite_empty_list = document.getElementById('wt-jshopping-favorite-empty-list');
     if (btn_favorite_empty_list) {
         btn_favorite_empty_list.addEventListener('click', () => {
-            let data = encodeURIComponent("");
-
-            document.cookie = "wtjshoppingfavorites=" + data + ";max-age=0; path=/; domain=" + location.hostname;
-            let body = document.querySelector('body');
-            if (body.classList.contains('wtjshoppingfavoritesView')) {
-                for (const el of document.querySelectorAll('[data-wt-jshop-favorite]')) {
-                    el.remove();
+			Joomla.request({
+                url: Joomla.getOptions('system.paths', '').root + '/index.php?option=com_ajax&plugin=wtjshoppingfavorites&group=jshoppingproducts&format=json&action=clearproducts',
+                onSuccess: function (response, xhr) {
+                    // Тут делаем что-то с результатами
+                    // Проверяем, пришли ли ответы
+                    if (response !== '') {
+                        let body = document.querySelector('body');
+						if (body.classList.contains('wtjshoppingfavoritesView')) {
+							for (const el of document.querySelectorAll('[data-wt-jshop-favorite]')) {
+								el.remove();
+							}
+						}
+						let digit = document.querySelector('.wt_jshop_favorite_module .digit');
+						digit.innerHTML = '';
+						digit.classList.remove('active');
+                    } else {
+                        console.error(response);
+                    }
                 }
-            }
-            let digit = document.querySelector('.wt_jshop_favorite_module .digit');
-            digit.innerHTML = '';
-            digit.classList.remove('active');
+            });
         });
     }
 

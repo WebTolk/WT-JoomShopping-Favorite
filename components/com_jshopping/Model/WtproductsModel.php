@@ -13,7 +13,6 @@ defined('_JEXEC') or die();
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Plugin\PluginHelper;
-use Joomla\Database\DatabaseInterface;
 
 class WtproductsModel
 {
@@ -56,7 +55,7 @@ class WtproductsModel
 			$query = "SELECT * FROM `#__jshopping_products` AS prod
                   LEFT JOIN `#__jshopping_products_to_categories` AS pr_cat USING (product_id)
                   WHERE prod.product_id IN(" . implode(',', $product_ids) . ") AND prod.product_publish=1 ORDER BY FIELD(prod.product_id, ".implode(',', $product_ids).")";
-			$db    = Factory::getContainer()->get(DatabaseInterface::class);
+			$db    = Factory::getDBO();
 			$db->setQuery($query);
 
 			$products = $db->loadObjectList();

@@ -2,9 +2,9 @@
 /**
  * WT JoomShopping Favorites is an alternative wish list (favorite products) for JoomShopping based on coockies.
  * @package     WT JoomShopping Favorite
- * @version     1.3.3
+ * @version     1.2.3
  * @Author      Sergey Tolkachyov, https://web-tolk.ru
- * @copyright   Copyright (C) 2022 Sergey Tolkachyov
+ * @copyright   Copyright (C) 2020 Sergey Tolkachyov
  * @license     GNU/GPL 3.0
  * @since       1.0.0
  * @link        https://web-tolk.ru/en/dev/joomshopping/wt-joomshopping-favorite.html
@@ -28,7 +28,7 @@ class WtjshoppingfavoritesController extends BaseController{
 	public function view()
 		{
 			$jshopConfig = \JSFactory::getConfig();
-			$lang        = Factory::getApplication()->getLanguage();
+			$lang        = Factory::getLanguage();
 			$lang->load('plg_jshoppingproducts_wtjshoppingfavorites', JPATH_ADMINISTRATOR, null, true);
 			PluginHelper::importPlugin('jshoppingproducts');
 			Factory::getApplication()->triggerEvent('onBeforeDisplayWtjshoppingfavorites', array(&$this));
@@ -37,6 +37,7 @@ class WtjshoppingfavoritesController extends BaseController{
 			$view        = $this->getView($view_name, \JSHelper::getDocumentType(), '', $view_config);
 			$view->setLayout("wtjshoppingfavorites");
 			$view->config = $jshopConfig;
+
 			$app = Factory::getApplication();
 
 			$params     = $app->getParams();
@@ -49,7 +50,17 @@ class WtjshoppingfavoritesController extends BaseController{
 			$mergedParams = clone $menuParams;
 			$mergedParams->merge($params);
 
-			$product_ids = unserialize($app->getInput()->cookie->get('wtjshoppingfavorites', null, 'string'));
+			$view->clear_favorites_btn_css_class = $mergedParams->get('clear_favorites_btn_css_class','btn btn-primary');
+			$view->_tmp_list_products_html_start = '';
+			$view->_tmp_list_products_html_end  = '';
+			
+			$product_ids = $app->input->cookie->get('wtjshoppingfavorites', null, 'string');
+			if(!empty($product_ids)){
+				$product_ids = unserialize($product_ids);
+			} else {
+				$product_ids = [];
+			}
+			
 			$product_list = new \stdClass();
 				if(!empty($product_ids)){
 
@@ -69,13 +80,16 @@ class WtjshoppingfavoritesController extends BaseController{
 					$view->noimage = $jshopConfig->noimage;
 					$view->shippinginfo = \JSHelper::SEFLink($jshopConfig->shippinginfourl, 1);
 					$view->total = $wt_products->getTotal();
+					$view->display_pagination = false;
+					$review = \JSFactory::getTable('review');
+					$view->allow_review = $review->getAllowReview();
 
 				} else {
 					$view->config = $jshopConfig;
 					$view->rows = [];
 					$product_list->products = [];
+
 				}
-				$view->clear_favorites_btn_css_class = $mergedParams->get('clear_favorites_btn_css_class');
 
 			\JSHelper::setMetaData(Text::_('PLG_WTJSHOPPINGFAVORITES'), '', $mergedParams->get('menu-meta_description'), $mergedParams);
 			Factory::getApplication()->triggerEvent('onBeforeDisplayProductListView',array(&$view, &$product_list));
