@@ -4,7 +4,7 @@
     <author>Sergey Tolkachyov</author>
     <authorEmail>info@web-tolk.ru</authorEmail>
     <authorUrl>https://web-tolk.ru/</authorUrl>
-	<creationDate>08/06/2023</creationDate>
+	<creationDate>17/06/2023</creationDate>
     <copyright>Sergey Tolkachyov</copyright>
     <license>GNU GPL 3.0</license>
     <version>2.0.0</version>
@@ -50,7 +50,7 @@
 
                 <field type="spacer" label="PLG_WTJSHOPPINGFAVORITES_PRODUCT_VIEW"/>
                 <field type="text" name="in_product_link_css_class" label="PLG_WTJSHOPPINGFAVORITES_LINK_CSS_CLASS_LABEL" description="PLG_WTJSHOPPINGFAVORITES_LINK_CSS_CLASS_DESC" default="btn btn-sm"/>
-				<field type="list" name="product_tmp_var" label="PLG_WTJSHOPPINGFAVORITES_PRODUCT_TMP_VAR_LABEL" description="PLG_WTJSHOPPINGFAVORITES_PRODUCT_TMP_VAR_DESC" default="_tmp_var_buttons">
+				<field type="list" name="product_tmp_var" label="PLG_WTJSHOPPINGFAVORITES_PRODUCT_TMP_VAR_LABEL" description="PLG_WTJSHOPPINGFAVORITES_PRODUCT_TMP_VAR_DESC" default="_tmp_product_html_after_buttons">
                         <option value="_tmp_product_html_start">_tmp_product_html_start</option>
                         <option value="_tmp_product_html_before_image">_tmp_product_html_before_image</option>
                         <option value="_tmp_product_html_body_image">_tmp_product_html_body_image</option>

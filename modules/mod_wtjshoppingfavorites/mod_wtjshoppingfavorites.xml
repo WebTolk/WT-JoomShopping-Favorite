@@ -2,7 +2,7 @@
 <extension type="module" client="site" method="upgrade">
 	<name>WT JoomShopping Favorite</name>
 	<author>Sergey Tolkachyov</author>
-	<creationDate>14/06/2023</creationDate>
+	<creationDate>17/06/2023</creationDate>
 	<copyright>Copyright (C) 2022 Sergey Tolkachyov. All rights reserved.</copyright>
 	<license>GNU/GPL 3.0</license>
 	<authorEmail>info@web-tolk.ru</authorEmail>

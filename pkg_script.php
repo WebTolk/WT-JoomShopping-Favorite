@@ -17,7 +17,7 @@ use Joomla\CMS\Installer\InstallerHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\Version;
-use Joomla\Database\DatabaseInterface;
+
 class pkg_wt_jshopping_favoritesInstallerScript
 {
     /**
@@ -66,7 +66,9 @@ class pkg_wt_jshopping_favoritesInstallerScript
     {
 		$version = new Version;
 			
-		if (!(new Version)->isCompatible('4.0')) {
+		// only for Joomla 3.x
+
+		if (version_compare($version->getShortVersion(), '4.0', '<')) {
 			
 			Factory::getApplication()->enqueueMessage('&#128546; <strong>WT JoomShopping Favorite</strong> package doesn\'t support Joomla versions <span class="alert-link">lower 4</span>. Your Joomla version is <span class="badge badge-important">'.$version->getShortVersion().'</span>','error');
 			return false;
@@ -117,8 +119,9 @@ class pkg_wt_jshopping_favoritesInstallerScript
 		$object->element = 'wtjshoppingfavorites';
 		$object->type = 'plugin';
 		$object->enabled = 1;
-		$result = Factory::getContainer()->get(DatabaseInterface::class)->updateObject('#__extensions', $object, 'element');
+		$result = Factory::getDbo()->updateObject('#__extensions', $object, 'element');
 
+				
 		$element = strtoupper($installer->getElement());
 
 
