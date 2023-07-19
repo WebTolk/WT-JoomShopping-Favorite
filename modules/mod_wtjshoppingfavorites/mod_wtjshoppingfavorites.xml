@@ -2,12 +2,12 @@
 <extension type="module" client="site" method="upgrade">
 	<name>WT JoomShopping Favorite</name>
 	<author>Sergey Tolkachyov</author>
-	<creationDate>17/06/2023</creationDate>
+	<creationDate>July 2023</creationDate>
 	<copyright>Copyright (C) 2022 Sergey Tolkachyov. All rights reserved.</copyright>
 	<license>GNU/GPL 3.0</license>
 	<authorEmail>info@web-tolk.ru</authorEmail>
 	<authorUrl>https://web-tolk.ru</authorUrl>
-	<version>2.0.0</version>
+	<version>2.0.1</version>
 	<description>MOD_WTJSHOPPINGFAVORITES_DESC</description>
 	<namespace path="src">Joomla\Module\Wtjshoppingfavorites</namespace>
 	<files>

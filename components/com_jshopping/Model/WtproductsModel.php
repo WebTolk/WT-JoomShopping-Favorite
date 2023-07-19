@@ -1,7 +1,7 @@
 <?php
 /**
  * Модель для работы расширений [Web-tolk.ru](https://web-tolk.ru):
- * @version      1.1.0 Apr 2022
+ * @version      2.0.1
  * @author       Sergey Tolkachyov
  * @package      Jshopping
  * @copyright    Copyright (C) 2022 Sergey Tolkachyov. All rights reserved.
@@ -53,9 +53,8 @@ class WtproductsModel
 		{
 			//@todo Вычистить запрос, оставить выборку только самого нужного
 			$query = "SELECT * FROM `#__jshopping_products` AS prod
-                  LEFT JOIN `#__jshopping_products_to_categories` AS pr_cat USING (product_id)
                   WHERE prod.product_id IN(" . implode(',', $product_ids) . ") AND prod.product_publish=1 ORDER BY FIELD(prod.product_id, ".implode(',', $product_ids).")";
-			$db    = Factory::getDBO();
+			$db    = Factory::getContainer()->get('DatabaseDriver');
 			$db->setQuery($query);
 
 			$products = $db->loadObjectList();

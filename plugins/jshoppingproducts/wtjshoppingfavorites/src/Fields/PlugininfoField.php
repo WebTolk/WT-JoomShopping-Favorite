@@ -2,7 +2,7 @@
 /**
  * WT JoomShopping Favorites is an alternative wish list (favorite products) for JoomShopping based on cookies.
  * @package     WT JoomShopping Favorite
- * @version     1.3.2
+ * @version     2.0.1
  * @Author      Sergey Tolkachyov, https://web-tolk.ru
  * @copyright   Copyright (C) 2020 Sergey Tolkachyov
  * @license     GNU/GPL 3.0

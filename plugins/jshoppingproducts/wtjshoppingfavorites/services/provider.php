@@ -1,8 +1,13 @@
 <?php
 /**
- *  @package   WT AmoCRM Radical Form
- *  @copyright Copyright Sergey Tolkachyov
- *  @license   GNU General Public License version 3, or later
+ * WT JoomShopping Favorites is an alternative wish list (favorite products) for JoomShopping based on cookies.
+ * @package     WT JoomShopping Favorite
+ * @version     2.0.1
+ * @Author      Sergey Tolkachyov, https://web-tolk.ru
+ * @copyright   Copyright (C) 2020 Sergey Tolkachyov
+ * @license     GNU/GPL 3.0
+ * @since       1.0.0
+ * @link        https://web-tolk.ru/en/dev/joomshopping/wt-joomshopping-favorite.html
  */
 
 defined('_JEXEC') || die;
