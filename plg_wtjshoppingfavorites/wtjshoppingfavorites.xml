@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<extension type="plugin" method="upgrade" group="jshoppingproducts">
+    <name>Jshoppingproducts - WT JoomShopping Favorites</name>
+    <author>Sergey Tolkachyov</author>
+    <authorEmail>info@web-tolk.ru</authorEmail>
+    <authorUrl>https://web-tolk.ru/</authorUrl>
+	<creationDate>March 2024</creationDate>
+    <copyright>Copyright (C) 2024 Sergey Tolkachyov. All rights reserved.</copyright>
+    <license>GNU GPL 3.0</license>
+    <version>2.0.2</version>
+    <description>PLG_WTJSHOPPINGFAVORITES_DESC</description>
+    <namespace path="src">Joomla\Plugin\Jshoppingproducts\Wtjshoppingfavorites</namespace>
+    <files>
+        <folder plugin="wtjshoppingfavorites">src</folder>
+        <folder>services</folder>
+		<folder>media</folder>
+		<folder>language</folder>
+    </files>
+	<media folder="media" destination="plg_jshoppingproducts_wtjshoppingfavorites">
+		<folder>js</folder>
+	</media>
+	 <languages folder="language" client="administrator">
+        <language tag="en-GB">en-GB/plg_jshoppingproducts_wtjshoppingfavorites.ini</language>
+        <language tag="ru-RU">ru-RU/plg_jshoppingproducts_wtjshoppingfavorites.ini</language>
+        <language tag="en-GB">en-GB/plg_jshoppingproducts_wtjshoppingfavorites.sys.ini</language>
+        <language tag="ru-RU">ru-RU/plg_jshoppingproducts_wtjshoppingfavorites.sys.ini</language>
+    </languages>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field addfieldprefix="Joomla\Plugin\Jshoppingproducts\Wtjshoppingfavorites\Fields" type="plugininfo" name="plugininfo"/>
+                <field type="text" name="cookie_period" label="PLG_WTJSHOPPINGFAVORITES_COOKIE_PERIOD" default="1"/>
+                <field type="spacer" label="PLG_WTJSHOPPINGFAVORITES_PRODUCT_LIST_VIEW"/>
+                    <field type="text" name="link_css_class" label="PLG_WTJSHOPPINGFAVORITES_LINK_CSS_CLASS_LABEL" description="PLG_WTJSHOPPINGFAVORITES_LINK_CSS_CLASS_DESC" default="btn btn-sm"/>
+                    <field type="note" class="alert alert-info" description="PLG_WTJSHOPPINGFAVORITES_SELECTED_CLASS"/>
+                    <field type="list" name="product_list_tmp_var" label="PLG_WTJSHOPPINGFAVORITES_PRODUCT_LIST_TMP_VAR_LABEL" description="PLG_WTJSHOPPINGFAVORITES_PRODUCT_LIST_TMP_VAR_DESC" default="_tmp_var_buttons">
+                        <option value="_tmp_var_start">_tmp_var_start</option>
+                        <option value="_tmp_var_image_block">_tmp_var_image_block</option>
+                        <option value="_tmp_var_bottom_foto">_tmp_var_bottom_foto</option>
+                        <option value="_tmp_var_old_price_ext">_tmp_var_old_price_ext</option>
+                        <option value="_tmp_var_bottom_old_price">_tmp_var_bottom_old_price</option>
+                        <option value="_tmp_var_price_ext">_tmp_var_price_ext</option>
+                        <option value="_tmp_var_bottom_price">_tmp_var_bottom_price</option>
+                        <option value="_tmp_var_top_buttons">_tmp_var_top_buttons</option>
+                        <option value="_tmp_var_buttons">_tmp_var_buttons</option>
+                        <option value="_tmp_var_bottom_buttons">_tmp_var_bottom_buttons</option>
+                        <option value="_tmp_var_end">_tmp_var_end</option>
+                    </field>
+
+                <field type="spacer" label="PLG_WTJSHOPPINGFAVORITES_PRODUCT_VIEW"/>
+                <field type="text" name="in_product_link_css_class" label="PLG_WTJSHOPPINGFAVORITES_LINK_CSS_CLASS_LABEL" description="PLG_WTJSHOPPINGFAVORITES_LINK_CSS_CLASS_DESC" default="btn btn-sm"/>
+				<field type="list" name="product_tmp_var" label="PLG_WTJSHOPPINGFAVORITES_PRODUCT_TMP_VAR_LABEL" description="PLG_WTJSHOPPINGFAVORITES_PRODUCT_TMP_VAR_DESC" default="_tmp_product_html_after_buttons">
+                        <option value="_tmp_product_html_start">_tmp_product_html_start</option>
+                        <option value="_tmp_product_html_before_image">_tmp_product_html_before_image</option>
+                        <option value="_tmp_product_html_body_image">_tmp_product_html_body_image</option>
+                        <option value="_tmp_product_html_after_image">_tmp_product_html_after_image</option>
+                        <option value="_tmp_product_html_before_image_thumb">_tmp_product_html_before_image_thumb</option>
+                        <option value="_tmp_product_html_after_image_thumb">_tmp_product_html_after_image_thumb</option>
+                        <option value="_tmp_product_html_after_video">_tmp_product_html_after_video</option>
+                        <option value="_tmp_product_html_before_atributes">_tmp_product_html_before_atributes</option>
+                        <option value="_tmp_product_html_after_atributes">_tmp_product_html_after_atributes</option>
+                        <option value="_tmp_product_html_after_freeatributes">_tmp_product_html_after_freeatributes</option>
+                        <option value="_tmp_product_html_before_price">_tmp_product_html_before_price</option>
+						<option value="_tmp_product_html_after_ef">_tmp_product_html_after_ef</option>
+						<option value="_tmp_product_html_before_buttons">_tmp_product_html_before_buttons</option>
+						<option value="_tmp_product_html_buttons">_tmp_product_html_buttons</option>
+						<option value="_tmp_product_html_after_buttons">_tmp_product_html_after_buttons</option>
+						<option value="_tmp_product_html_before_demofiles">_tmp_product_html_before_demofiles</option>
+						<option value="_tmp_product_html_before_review">_tmp_product_html_before_review</option>
+						<option value="_tmp_product_html_before_related">_tmp_product_html_before_related</option>
+						<option value="_tmp_product_html_end">_tmp_product_html_end</option>
+                    </field>
+
+                <field type="spacer" label="PLG_WTJSHOPPINGFAVORITES_BTN_ICON_CLASS"/>
+                <field type="text" name="btn_icon_css_class" label="PLG_WTJSHOPPINGFAVORITES_BTN_ICON_CLASS_LABEL" default="fa fa-heart"/>
+            </fieldset>
+        </fields>
+    </config>
+</extension>

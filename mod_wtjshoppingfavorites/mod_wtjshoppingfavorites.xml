@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" client="site" method="upgrade">
+	<name>WT JoomShopping Favorite</name>
+	<author>Sergey Tolkachyov</author>
+	<creationDate>March 2024</creationDate>
+	<copyright>Copyright (C) 2024 Sergey Tolkachyov. All rights reserved.</copyright>
+	<license>GNU/GPL 3.0</license>
+	<authorEmail>info@web-tolk.ru</authorEmail>
+	<authorUrl>https://web-tolk.ru</authorUrl>
+	<version>2.0.2</version>
+	<description>MOD_WTJSHOPPINGFAVORITES_DESC</description>
+	<namespace path="src">Joomla\Module\Wtjshoppingfavorites</namespace>
+	<files>
+		<folder module="mod_wtjshoppingfavorites">src</folder>
+		<folder>services</folder>
+		<folder>tmpl</folder>
+		<folder>language</folder>
+		<folder>media</folder>
+	</files>
+	<media folder="media" destination="mod_wtjshoppingfavorites">
+		<folder>css</folder>
+	</media>
+	 <languages folder="language">
+        <language tag="en-GB">en-GB/mod_wtjshoppingfavorites.ini</language>
+		<language tag="ru-RU">ru-RU/mod_wtjshoppingfavorites.ini</language>
+	    <language tag="en-GB">en-GB/mod_wtjshoppingfavorites.sys.ini</language>
+		<language tag="ru-RU">ru-RU/mod_wtjshoppingfavorites.sys.ini</language>
+    </languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field addfieldprefix="Joomla\Module\Wtjshoppingfavorites\Site\Fields" type="moduleinfo" name="moduleinfo"/>
+				<field
+						name="layout"
+						type="modulelayout"
+						label="JFIELD_ALT_LAYOUT_LABEL"
+						description="JFIELD_ALT_MODULE_LAYOUT_DESC"
+						class="form-select"
+				/>
+				<field type="text"
+					   name="btn_icon_css_class"
+					   label="MOD_WTJSHOPPINGFAVORITES_BTN_ICON_CSS_CLASS_LABEL"
+					   description="MOD_WTJSHOPPINGFAVORITES_BTN_ICON_CSS_CLASS_DESC"/>
+				<field type="radio"
+					   name="use_module_css"
+					   label="MOD_WTJSHOPPINGFAVORITES_USE_MODULE_CSS"
+					   layout="joomla.form.field.radio.switcher"
+					   default="1">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			</fieldset>
+			<fieldset name="advanced">
+				<field
+						name="moduleclass_sfx"
+						type="textarea"
+						label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+						description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC"
+						rows="3"
+				/>
+
+
+				<field
+						name="cache"
+						type="list"
+						label="COM_MODULES_FIELD_CACHING_LABEL"
+						description="COM_MODULES_FIELD_CACHING_DESC"
+						default="1"
+						filter="integer"
+				>
+					<option value="1">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+
+				<field
+						name="cache_time"
+						type="number"
+						label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+						description="COM_MODULES_FIELD_CACHE_TIME_DESC"
+						default="900"
+						filter="integer"
+				/>
+
+				<field
+						name="cachemode"
+						type="hidden"
+						default="static"
+				>
+					<option value="static"></option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>
