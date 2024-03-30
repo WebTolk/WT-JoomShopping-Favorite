@@ -1,15 +1,14 @@
 <?php
 /**
+ * WT JoomShopping Favorites is an alternative wish list (favorite products) for JoomShopping based on cookies.
  * @package     WT JoomShopping Favorite
  * @version     2.0.2
- * WT JoomShopping Favorites is an alternative wish list (favorite products) for JoomShopping based on coockies.
- * @Author Sergey Tolkachyov, https://web-tolk.ru
+ * @Author      Sergey Tolkachyov, https://web-tolk.ru
  * @copyright   Copyright (C) 2024 Sergey Tolkachyov
  * @license     GNU/GPL 3.0
- * @since 1.0.0
+ * @since       1.0.0
+ * @link        https://web-tolk.ru/en/dev/joomshopping/wt-joomshopping-favorite
  */
-
-// No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
 use Joomla\CMS\Application\AdministratorApplication;
@@ -29,41 +28,42 @@ return new class () implements ServiceProviderInterface {
             /**
              * The application object
              *
-             * @var  AdministratorApplication
+             * @var AdministratorApplication $app
              *
-             * @since  1.0.0
+             * @since 1.0.0
              */
             protected AdministratorApplication $app;
 
             /**
              * The Database object.
              *
-             * @var   DatabaseDriver
+             * @var DatabaseDriver $db
              *
-             * @since  1.0.0
+             * @since 1.0.0
              */
             protected DatabaseDriver $db;
 
             /**
              * Minimum Joomla version required to install the extension.
              *
-             * @var  string
+             * @var string $minimumJoomla
              *
-             * @since  1.0.0
+             * @since 1.0.0
              */
             protected string $minimumJoomla = '4.3';
 
             /**
              * Minimum PHP version required to install the extension.
              *
-             * @var  string
+             * @var string $minimumPhp
              *
-             * @since  1.0.0
+             * @since 1.0.0
              */
             protected string $minimumPhp = '7.4';
 
             /**
              * @var array $providersInstallationMessageQueue
+             *
              * @since 2.0.3
              */
             protected $providersInstallationMessageQueue = [];
@@ -71,14 +71,14 @@ return new class () implements ServiceProviderInterface {
             /**
              * Constructor.
              *
-             * @param   AdministratorApplication  $app  The application object.
+             * @param AdministratorApplication $app The application object.
              *
              * @since 1.0.0
              */
             public function __construct(AdministratorApplication $app)
             {
                 $this->app = $app;
-                $this->db  = Factory::getContainer()->get('DatabaseDriver');
+                $this->db = Factory::getContainer()->get('DatabaseDriver');
             }
 
             /**
@@ -156,9 +156,9 @@ return new class () implements ServiceProviderInterface {
                 {
                     if ($type != 'uninstall')
                     {
-                        $smiles    = ['&#9786;', '&#128512;', '&#128521;', '&#128525;', '&#128526;', '&#128522;', '&#128591;'];
+                        $smiles = ['&#9786;', '&#128512;', '&#128521;', '&#128525;', '&#128526;', '&#128522;', '&#128591;'];
                         $smile_key = array_rand($smiles, 1);
-                        $smile     = $smiles[$smile_key];
+                        $smile = $smiles[$smile_key];
                     }
                 }
                 else
@@ -167,7 +167,7 @@ return new class () implements ServiceProviderInterface {
                 }
 
                 $element = strtoupper($adapter->getElement());
-                $type    = strtoupper($type);
+                $type = strtoupper($type);
 
                 $html = '
 				<div class="row bg-white m-0">
@@ -186,7 +186,7 @@ return new class () implements ServiceProviderInterface {
 					<a class="btn btn-sm btn-outline-primary" href="mailto:info@web-tolk.ru"><i class="icon-envelope"></i> info@web-tolk.ru</a>
 				</p>
 				<p><a class="btn btn-danger w-100" href="https://t.me/joomlaru" target="_blank">' . Text::_($element . '_JOOMLARU_TELEGRAM_CHAT') . '</a></p>
-				' . Text::_($element . "_MAYBE_INTERESTING") . '
+				' . Text::_($element . '_MAYBE_INTERESTING') . '
 				</div>
 				';
                 $this->app->enqueueMessage($html, 'info');

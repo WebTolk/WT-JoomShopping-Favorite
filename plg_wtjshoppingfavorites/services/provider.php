@@ -7,9 +7,8 @@
  * @copyright   Copyright (C) 2024 Sergey Tolkachyov
  * @license     GNU/GPL 3.0
  * @since       1.0.0
- * @link        https://web-tolk.ru/en/dev/joomshopping/wt-joomshopping-favorite.html
+ * @link        https://web-tolk.ru/en/dev/joomshopping/wt-joomshopping-favorite
  */
-
 defined('_JEXEC') || die;
 
 use Joomla\CMS\Extension\PluginInterface;
@@ -37,7 +36,7 @@ return new class implements ServiceProviderInterface {
             PluginInterface::class,
             function (Container $container) {
                 $subject = $container->get(DispatcherInterface::class);
-                $config  = (array) PluginHelper::getPlugin('jshoppingproducts', 'wtjshoppingfavorites');
+                $config = (array) PluginHelper::getPlugin('jshoppingproducts', 'wtjshoppingfavorites');
 
                 $plugin = new Wtjshoppingfavorites($subject, $config);
                 $plugin->setApplication(Factory::getApplication());

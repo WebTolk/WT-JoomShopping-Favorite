@@ -7,7 +7,7 @@
  * @copyright   Copyright (C) 2024 Sergey Tolkachyov
  * @license     GNU/GPL 3.0
  * @since       1.0.0
- * @link        https://web-tolk.ru/en/dev/joomshopping/wt-joomshopping-favorite.html
+ * @link        https://web-tolk.ru/en/dev/joomshopping/wt-joomshopping-favorite
  */
 namespace Joomla\Plugin\Jshoppingproducts\Wtjshoppingfavorites\Extension;
 
@@ -43,7 +43,7 @@ class Wtjshoppingfavorites extends CMSPlugin implements SubscriberInterface
      */
     private function getCookiePeriod(): int
     {
-        return $cookie_period = time() + (int)$this->params->get('cookie_period', '1') * 86400;
+        return time() + (int)$this->params->get('cookie_period', '1') * 86400;
     }
 
     /**
@@ -72,7 +72,7 @@ class Wtjshoppingfavorites extends CMSPlugin implements SubscriberInterface
             return;
         }
 
-        $product_id = $this->getApplication()->getInput()->get("product_id", "", "int");
+        $product_id = $this->getApplication()->getInput()->get('product_id', '', 'int');
 
         $product_ids = $this->getApplication()->getInput()->cookie->get('wtjshoppingfavorites','','raw');
         if (!empty($product_ids))
@@ -90,7 +90,6 @@ class Wtjshoppingfavorites extends CMSPlugin implements SubscriberInterface
          * Если product_id уже есть - удаляем.
          * Если нет - добавляем.
          */
-
         if (empty($product_ids))
         {
             // Куки нет вообще. В первый раз добавляет.
@@ -115,6 +114,7 @@ class Wtjshoppingfavorites extends CMSPlugin implements SubscriberInterface
                 $response['added'] = true;
             }
         }
+
         $this->getApplication()->getInput()->cookie->set(
             'wtjshoppingfavorites',
             serialize(array_unique($product_ids)),
@@ -135,12 +135,13 @@ class Wtjshoppingfavorites extends CMSPlugin implements SubscriberInterface
      */
     public function onBeforeDisplayProductListView(Event $event): void
     {
+        /* @var $view object JoomShopping Product List View object */
         $view = $event->getArgument(0);
         $productlist = $event->getArgument(1);
 
         $this->addJs();
-        $link_css_class = $this->params->get("link_css_class");
-        $product_list_tmp_var = $this->params->get("product_list_tmp_var");
+        $link_css_class = $this->params->get('link_css_class');
+        $product_list_tmp_var = $this->params->get('product_list_tmp_var');
 
         $rows = $view->rows;
         $cookie = $this->getApplication()->getInput()->cookie->get('wtjshoppingfavorites', null, $filter = 'string');
@@ -154,7 +155,7 @@ class Wtjshoppingfavorites extends CMSPlugin implements SubscriberInterface
         }
         foreach ($rows as $row)
         {
-            if (($key = array_search($row->product_id, $cookie)) !== false)
+            if (in_array($row->product_id, $cookie))
             {
                 $selected = 'selected';
             }
@@ -163,7 +164,7 @@ class Wtjshoppingfavorites extends CMSPlugin implements SubscriberInterface
                 $selected = '';
             }
 
-            $button = "<button type='button' class='" . $link_css_class . " " . $selected . "' id='favorite_button" . $row->product_id . "' data-favorite='" . $row->product_id . "'><i class=\"" . $this->params->get("btn_icon_css_class") . "\"></i></button>";
+            $button = '<button type=\"button\" class=\"' . $link_css_class . ' ' . $selected . '\" id=\"favorite_button' . $row->product_id . '\" data-favorite=\"' . $row->product_id . '\"><i class=\"' . $this->params->get('btn_icon_css_class') . '\"></i></button>';
             if (!empty($row->$product_list_tmp_var))
             {
                 $row->$product_list_tmp_var .= $button;
@@ -187,8 +188,8 @@ class Wtjshoppingfavorites extends CMSPlugin implements SubscriberInterface
         $view = $event->getArgument(0);
 
         $this->addJs();
-        $link_css_class = $this->params->get("in_product_link_css_class");
-        $product_list_tmp_var = $this->params->get("product_tmp_var");
+        $link_css_class = $this->params->get('in_product_link_css_class');
+        $product_list_tmp_var = $this->params->get('product_tmp_var');
 
         $cookie = $this->getApplication()->getInput()->cookie->get('wtjshoppingfavorites', null, $filter = 'string');
         if (!empty($cookie))
@@ -202,7 +203,7 @@ class Wtjshoppingfavorites extends CMSPlugin implements SubscriberInterface
 
         $product_id = $view->product->product_id;
 
-        if (($key = array_search($product_id, (array)$cookie)) !== false)
+        if (in_array($product_id, $cookie))
         {
             $selected = 'selected';
         }
@@ -211,8 +212,7 @@ class Wtjshoppingfavorites extends CMSPlugin implements SubscriberInterface
             $selected = '';
         }
 
-        $button = "<button type='button' class='" . $link_css_class . " " . $selected . "' id='favorite_button" . $product_id . "' data-favorite='" . $product_id . "'><i class=\"" . $this->params->get("btn_icon_css_class") . "\"></i></button>";
-
+        $button = '<button type=\"button\" class=\"' . $link_css_class . ' ' . $selected . '\" id=\"favorite_button' . $product_id . '\" data-favorite=\"' . $product_id . '\"><i class=\"' . $this->params->get('btn_icon_css_class') . '\"></i></button>';
         if (!empty($view->$product_list_tmp_var))
         {
             $view->$product_list_tmp_var .= $button;

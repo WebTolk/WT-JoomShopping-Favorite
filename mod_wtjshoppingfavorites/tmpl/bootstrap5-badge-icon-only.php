@@ -13,21 +13,21 @@ defined('_JEXEC') or die('Restricted access');
 
 use Joomla\CMS\Router\Route;
 
-if (!empty($product_ids) && !is_null($product_ids) && count($product_ids) > 0)
+if (!empty($product_ids))
 {
 	$active = ' active ';
-	$digit  = count($product_ids);
+	$digit = count($product_ids);
 }
 else
 {
-	$active = "";
-	$digit  = "0";
+	$active = '';
+	$digit = '0';
 
 }
 ?>
 
 <a class="wt_jshop_favorite_module btn position-relative <?php echo $active; ?>"
-   href="<?php echo Route::_("index.php?option=com_jshopping&view=wtjshoppingfavorites" . $itemid); ?>">
+   href="<?php echo Route::_('index.php?option=com_jshopping&view=wtjshoppingfavorites' . $itemid); ?>">
 	<i class="<?php echo $btn_icon_css_class; ?>" aria-hidden="true"></i>
 	<span class="digit position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
 		<?php echo $digit; ?>

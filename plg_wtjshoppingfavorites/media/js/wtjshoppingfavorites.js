@@ -6,7 +6,7 @@
  * @copyright   Copyright (C) 2024 Sergey Tolkachyov
  * @license     GNU/GPL 3.0
  * @since       1.0.0
- * @link        https://web-tolk.ru/en/dev/joomshopping/wt-joomshopping-favorite.html
+ * @link        https://web-tolk.ru/en/dev/joomshopping/wt-joomshopping-favorite
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /**
  *
- * @param favorite    json response from ajax request
+ * @param favorite json response from ajax request
  * @param product_id JoomShopping product id
  */
 function changeModuleDigit(favorite, product_id) {
@@ -73,7 +73,6 @@ function changeModuleDigit(favorite, product_id) {
         let favorite_button = document.getElementById('favorite_button' + product_id);
 
         if (favorite === true) {
-
             digit_int++;
             digit.innerHTML = digit_int;
 
@@ -84,12 +83,10 @@ function changeModuleDigit(favorite, product_id) {
             favorite_button.classList.add('selected');
 
         } else {
-
             digit_int--;
             digit.innerHTML = digit_int;
 
             if (digit === 0) {
-
                 favorite_module.classList.remove('active');
             }
             favorite_button.classList.remove('selected');

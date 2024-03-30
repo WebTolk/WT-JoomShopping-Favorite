@@ -52,9 +52,9 @@ class WtproductsModel
 		if (count($product_ids) > 0)
 		{
 			//@todo Вычистить запрос, оставить выборку только самого нужного
-			$query = "SELECT * FROM `#__jshopping_products` AS prod
-                  WHERE prod.product_id IN(" . implode(',', $product_ids) . ") AND prod.product_publish=1 ORDER BY FIELD(prod.product_id, ".implode(',', $product_ids).")";
-			$db    = Factory::getContainer()->get('DatabaseDriver');
+			$query = 'SELECT * FROM `#__jshopping_products` AS prod
+                  WHERE prod.product_id IN(' . implode(',', $product_ids) . ') AND prod.product_publish=1 ORDER BY FIELD(prod.product_id, '.implode(',', $product_ids).')';
+			$db = Factory::getContainer()->get('DatabaseDriver');
 			$db->setQuery($query);
 
 			$products = $db->loadObjectList();
@@ -93,24 +93,24 @@ class WtproductsModel
 		// Если включен плагин добавления в избранное
 		if (PluginHelper::isEnabled('jshoppingproducts', 'wtjshoppingfavorites') === true)
 		{
-			$plugin               = PluginHelper::getPlugin('jshoppingproducts', 'wtjshoppingfavorites');
-			$params               = (!empty($plugin->params) ? json_decode($plugin->params) : '');
-			$link_css_class       = $params->link_css_class;
+			$plugin = PluginHelper::getPlugin('jshoppingproducts', 'wtjshoppingfavorites');
+			$params = !empty($plugin->params) ? json_decode($plugin->params) : '';
+			$link_css_class = $params->link_css_class;
 			$product_list_tmp_var = $params->product_list_tmp_var;
-			$btn_type             = $params->in_product_btn_type;
-			if ($btn_type == "button")
+			$btn_type = $params->in_product_btn_type;
+			if ($btn_type == 'button')
 			{
-				$tag = "button";
+				$tag = 'button';
 			}
 			else
 			{
-				$tag = "a";
+				$tag = 'a';
 			}
 			if (count($this->products) > 0)
 			{
 				foreach ($this->products as $product)
 				{
-					$product->$product_list_tmp_var = "<" . $tag . " " . (($tag == "a") ? "href='#'" : '') . "  class='" . $link_css_class . " selected' id='favorite_button" . $product->product_id . "' data-favorite='" . $product->product_id . "'><i class=\"" . $params->btn_icon_css_class . "\"></i></" . $tag . ">";
+					$product->$product_list_tmp_var = '<' . $tag . ' ' . (($tag == 'a') ? 'href=\"#\"' : '') . '  class=\"' . $link_css_class . ' selected\" id=\"favorite_button' . $product->product_id . '\" data-favorite=\"' . $product->product_id . '\"><i class=\"' . $params->btn_icon_css_class . '\"></i></' . $tag . '>';
 				}
 			}
 		}
@@ -131,24 +131,24 @@ class WtproductsModel
 		// Если включен плагин добавления в избранное
 		if (PluginHelper::isEnabled('jshoppingproducts', 'wtjshoppingcompare') === true)
 		{
-			$plugin               = PluginHelper::getPlugin('jshoppingproducts', 'wtjshoppingcompare');
-			$params               = (!empty($plugin->params) ? json_decode($plugin->params) : '');
-			$link_css_class       = $params->link_css_class;
+			$plugin = PluginHelper::getPlugin('jshoppingproducts', 'wtjshoppingcompare');
+			$params = (!empty($plugin->params) ? json_decode($plugin->params) : '');
+			$link_css_class = $params->link_css_class;
 			$product_list_tmp_var = $params->product_list_tmp_var;
-			$btn_type             = $params->in_product_btn_type;
-			if ($btn_type == "button")
+			$btn_type = $params->in_product_btn_type;
+			if ($btn_type == 'button')
 			{
-				$tag = "button";
+				$tag = 'button';
 			}
 			else
 			{
-				$tag = "a";
+				$tag = 'a';
 			}
 			if (count($this->products) > 0)
 			{
 				foreach ($this->products as $product)
 				{
-					$product->$product_list_tmp_var = "<" . $tag . " " . (($tag == "a") ? "href='#'" : '') . "  class='" . $link_css_class . " selected' id='compare_button" . $product->product_id . "' data-compare='" . $product->product_id . "'><i class=\"" . $params->btn_icon_css_class . "\"></i></" . $tag . ">";
+					$product->$product_list_tmp_var = '<' . $tag . ' ' . (($tag == 'a') ? 'href=\"#\"' : '') . '  class=\"' . $link_css_class . ' selected\" id=\"compare_button' . $product->product_id . '\" data-compare=\"' . $product->product_id . '\"><i class=\"' . $params->btn_icon_css_class . '\"></i></' . $tag . '>';
 				}
 			}
 		}
@@ -169,8 +169,7 @@ class WtproductsModel
 	{
 		$product = \JSFactory::getTable('product', 'jshop');
 		$product->load($product_id);
-		$extra_fields = $product->getExtraFields();
-		return $extra_fields;
+        return $product->getExtraFields();
 	}
 
 	/**

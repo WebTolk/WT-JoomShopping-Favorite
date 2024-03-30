@@ -14,19 +14,23 @@ defined('_JEXEC') or die('Restricted access');
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
 
-if(!empty($product_ids) && !is_null($product_ids) && count($product_ids)>0)
+if(!empty($product_ids))
 {
     $active = ' active ';
     $digit = count($product_ids);
 }
 else
 {
-    $active = "";
-    $digit="0";
+    $active = '';
+    $digit = '0';
 }
 ?>
-<div class="wt_jshop_favorite_module <?php echo $params->get("moduleclass_sfx");?>  <?php echo $active;?>">
-	<a title="В избранном" href="<?php echo Route::_("index.php?option=com_jshopping&view=wtjshoppingfavorites".$itemid);?>">
-		<span class="num"><i class="<?php echo $btn_icon_css_class;?>" aria-hidden="true"></i><span class="digit"><?php echo $digit;?></span></span> <span class="text"><?php echo Text::_('MOD_WTJSHOPPINGFAVORITES_TEXT');?></span>
+
+<div class="wt_jshop_favorite_module <?php echo $params->get('moduleclass_sfx'); ?>  <?php echo $active; ?>">
+	<a title="В избранном" href="<?php echo Route::_('index.php?option=com_jshopping&view=wtjshoppingfavorites'.$itemid);?>">
+		<span class="num">
+            <i class="<?php echo $btn_icon_css_class; ?>" aria-hidden="true"></i>
+            <span class="digit"><?php echo $digit; ?></span>
+        </span> <span class="text"><?php echo Text::_('MOD_WTJSHOPPINGFAVORITES_TEXT'); ?></span>
 	</a>
 </div>

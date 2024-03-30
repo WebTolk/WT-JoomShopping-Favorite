@@ -7,7 +7,7 @@
  * @copyright   Copyright (C) 2024 Sergey Tolkachyov
  * @license     GNU/GPL 3.0
  * @since       1.0.0
- * @link        https://web-tolk.ru/en/dev/joomshopping/wt-joomshopping-favorite.html
+ * @link        https://web-tolk.ru/en/dev/joomshopping/wt-joomshopping-favorite
  */
 namespace Joomla\Module\Wtjshoppingfavorites\Site\Dispatcher;
 
@@ -58,17 +58,13 @@ class Dispatcher extends AbstractModuleDispatcher
 
 
         $itemid = $this->moduleHelper->getItemid('com_jshopping', 'wtjshoppingfavorites');
-        if (empty($itemid) || is_null($itemid))
+        if (empty($itemid))
         {
             $itemid = \JSHelper::getDefaultItemid();
-            $data['itemid'] = "&Itemid=" . $itemid;
         }
-        else
-        {
-            $data['itemid'] = "&Itemid=" . $itemid;
-        }
+        $data['itemid'] = '&Itemid=' . $itemid;
 
-        $btn_icon_css_class = $data['params']->get('btn_icon_css_class','');
+        $btn_icon_css_class = $data['params']->get('btn_icon_css_class', '');
 
         if (empty($btn_icon_css_class))
         {
@@ -76,7 +72,7 @@ class Dispatcher extends AbstractModuleDispatcher
             if ($plugin)
             {
                 $pluginParams = new Registry($plugin->params);
-                $btn_icon_css_class = $pluginParams->get("btn_icon_css_class");
+                $btn_icon_css_class = $pluginParams->get('btn_icon_css_class');
             }
         }
         $data['btn_icon_css_class'] = $btn_icon_css_class;
@@ -85,10 +81,10 @@ class Dispatcher extends AbstractModuleDispatcher
          * Take a css file for tmpl with the same name form media folder
          */
 
-        $tmpl_css      = explode(':', $data['params']->get('layout'));
+        $tmpl_css = explode(':', $data['params']->get('layout'));
         $tmpl_css_file = $tmpl_css[1];
         /* @var $wa WebAssetManager */
-        $wa            = $app->getDocument()->getWebAssetManager();
+        $wa = $app->getDocument()->getWebAssetManager();
         if (file_exists('media/mod_wtjshoppingfavorites/css/' . $tmpl_css_file . '.css'))
         {
             $wa->registerAndUseStyle($data['module']->module . ':' . $tmpl_css_file, $data['module']->module . '/' . $tmpl_css_file . '.css');

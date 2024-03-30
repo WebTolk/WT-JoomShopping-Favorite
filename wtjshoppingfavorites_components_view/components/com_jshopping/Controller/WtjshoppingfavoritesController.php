@@ -7,7 +7,7 @@
  * @copyright   Copyright (C) 2024 Sergey Tolkachyov
  * @license     GNU/GPL 3.0
  * @since       1.0.0
- * @link        https://web-tolk.ru/en/dev/joomshopping/wt-joomshopping-favorite.html
+ * @link        https://web-tolk.ru/en/dev/joomshopping/wt-joomshopping-favorite
  */
 namespace Joomla\Component\Jshopping\Site\Controller;
 
@@ -32,21 +32,20 @@ class WtjshoppingfavoritesController extends BaseController{
 	public function view(): void
     {
         $jshopConfig = \JSFactory::getConfig();
-        $lang        = Factory::getLanguage();
+        $app = Factory::getApplication();
+        $lang = $app->getLanguage();
         $lang->load('plg_jshoppingproducts_wtjshoppingfavorites', JPATH_ADMINISTRATOR, null, true);
         PluginHelper::importPlugin('jshoppingproducts');
-        Factory::getApplication()->triggerEvent('onBeforeDisplayWtjshoppingfavorites', array(&$this));
-        $view_name   = "wtjshoppingfavorites";
-        $view_config = array("template_path" => JPATH_COMPONENT . "/templates/" . $jshopConfig->template . "/" . $view_name);
-        $view        = $this->getView($view_name, \JSHelper::getDocumentType(), '', $view_config);
-        $view->setLayout("wtjshoppingfavorites");
+        $app->triggerEvent('onBeforeDisplayWtjshoppingfavorites', array(&$this));
+        $view_name = 'wtjshoppingfavorites';
+        $view_config = array('template_path' => JPATH_COMPONENT . '/templates/' . $jshopConfig->template . '/' . $view_name);
+        $view = $this->getView($view_name, \JSHelper::getDocumentType(), '', $view_config);
+        $view->setLayout('wtjshoppingfavorites');
         $view->config = $jshopConfig;
 
-        $app = Factory::getApplication();
-
-        $params     = $app->getParams();
+        $params = $app->getParams();
         $menuParams = new Registry();
-        $menu       = $app->getMenu()->getActive();
+        $menu = $app->getMenu()->getActive();
         if ($menu)
         {
             $menuParams->loadString($menu->getParams());
@@ -58,8 +57,8 @@ class WtjshoppingfavoritesController extends BaseController{
         $view->_tmp_list_products_html_start = '';
         $view->_tmp_list_products_html_end  = '';
 
-        $product_ids = $app->input->cookie->get('wtjshoppingfavorites', null, 'string');
-        if(!empty($product_ids))
+        $product_ids = $app->getInput()->cookie->get('wtjshoppingfavorites', null, 'string');
+        if (!empty($product_ids))
         {
             $product_ids = unserialize($product_ids);
         }
@@ -69,15 +68,15 @@ class WtjshoppingfavoritesController extends BaseController{
         }
 
         $product_list = new \stdClass();
-        if(!empty($product_ids))
+        if (!empty($product_ids))
         {
             $wt_products = new WtproductsModel;
             $wt_products->loadProductsByIds($product_ids);
 
             $view->rows = $wt_products->products;
             $product_list->products = $wt_products->products;
-            $view->config->show_sort_product          = "0"; //Отключаем показ фильтров и сортировки
-            $view->config->show_count_select_products = "0";
+            $view->config->show_sort_product = '0'; //Отключаем показ фильтров и сортировки
+            $view->config->show_count_select_products = '0';
             $view->template_block_list_product = $wt_products->getTmplBlockListProduct();
             $view->template_no_list_product = $wt_products->getTmplNoListProduct();
             $view->template_block_form_filter = $wt_products->getTmplBlockFormFilter();
@@ -90,19 +89,17 @@ class WtjshoppingfavoritesController extends BaseController{
             $view->display_pagination = false;
             $review = \JSFactory::getTable('review');
             $view->allow_review = $review->getAllowReview();
-
         }
         else
         {
             $view->config = $jshopConfig;
             $view->rows = [];
             $product_list->products = [];
-
         }
 
         \JSHelper::setMetaData(Text::_('PLG_WTJSHOPPINGFAVORITES'), '', $mergedParams->get('menu-meta_description'), $mergedParams);
-        Factory::getApplication()->triggerEvent('onBeforeDisplayProductListView',array(&$view, &$product_list));
-        Factory::getApplication()->triggerEvent('onBeforeDisplaywtjshoppingfavoritesView',array(&$view, &$product_list));
+        $app->triggerEvent('onBeforeDisplayProductListView', array(&$view, &$product_list));
+        $app->triggerEvent('onBeforeDisplaywtjshoppingfavoritesView', array(&$view, &$product_list));
         $view->display();
     }
 }

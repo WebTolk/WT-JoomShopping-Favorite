@@ -7,29 +7,29 @@
  * @copyright   Copyright (C) 2024 Sergey Tolkachyov
  * @license     GNU/GPL 3.0
  * @since       1.0.0
- * @link        https://web-tolk.ru/en/dev/joomshopping/wt-joomshopping-favorite.html
+ * @link        https://web-tolk.ru/en/dev/joomshopping/wt-joomshopping-favorite
  */
 defined('_JEXEC') or die('Restricted access');
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
 
-if (!empty($product_ids) && !is_null($product_ids) && count($product_ids)>0)
+if (!empty($product_ids))
 {
     $active = ' active ';
     $digit = count($product_ids);
 }
 else
 {
-    $active = "";
-    $digit="0";
+    $active = '';
+    $digit = '0';
 }
 ?>
 
-<a class="wt_jshop_favorite_module btn btn-primary position-relative <?php echo $active;?>" href="<?php echo Route::_("index.php?option=com_jshopping&view=wtjshoppingfavorites".$itemid);?>">
-	<i class="<?php echo $btn_icon_css_class;?>" aria-hidden="true"></i>
-	<?php echo Text::_('MOD_WTJSHOPPINGFAVORITES_TEXT');?>
+<a class="wt_jshop_favorite_module btn btn-primary position-relative <?php echo $active; ?>" href="<?php echo Route::_('index.php?option=com_jshopping&view=wtjshoppingfavorites'.$itemid); ?>">
+	<i class="<?php echo $btn_icon_css_class; ?>" aria-hidden="true"></i>
+	<?php echo Text::_('MOD_WTJSHOPPINGFAVORITES_TEXT'); ?>
 	<span class="digit position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-		<?php echo $digit;?>
+		<?php echo $digit; ?>
 	</span>
 </a>
