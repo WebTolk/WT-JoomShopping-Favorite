@@ -176,6 +176,8 @@ class Wtjshoppingfavorites extends CMSPlugin implements SubscriberInterface
 				$row->$product_list_tmp_var = $button;
 			}
 		}
+
+		$event->setArgument(0, $view);
 	}
 
 	/**
