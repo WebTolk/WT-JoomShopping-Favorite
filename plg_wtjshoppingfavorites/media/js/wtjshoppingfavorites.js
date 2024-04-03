@@ -19,8 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
             Joomla.request({
                 url: Joomla.getOptions('system.paths', '').root + '/index.php?option=com_ajax&plugin=wtjshoppingfavorites&group=jshoppingproducts&format=json&product_id=' + product_id,
                 onSuccess: function (response, xhr) {
-                    // Тут делаем что-то с результатами
-                    // Проверяем, пришли ли ответы
                     if (response !== '') {
                         let favorite = JSON.parse(response);
                         changeModuleDigit(favorite.data.added, product_id);
@@ -38,8 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			Joomla.request({
                 url: Joomla.getOptions('system.paths', '').root + '/index.php?option=com_ajax&plugin=wtjshoppingfavorites&group=jshoppingproducts&format=json&action=clearproducts',
                 onSuccess: function (response, xhr) {
-                    // Тут делаем что-то с результатами
-                    // Проверяем, пришли ли ответы
                     if (response !== '') {
                         let body = document.querySelector('body');
 						if (body.classList.contains('wtjshoppingfavoritesView')) {

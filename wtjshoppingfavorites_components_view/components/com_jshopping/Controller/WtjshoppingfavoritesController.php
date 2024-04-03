@@ -13,7 +13,7 @@ namespace Joomla\Component\Jshopping\Site\Controller;
 
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
-use Joomla\Component\Jshopping\Site\Model\WtproductsModel;
+use Joomla\Component\Jshopping\Site\Model\Productlist;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\Language\Text;
@@ -70,22 +70,34 @@ class WtjshoppingfavoritesController extends BaseController{
         $product_list = new \stdClass();
         if (!empty($product_ids))
         {
-            $wt_products = new WtproductsModel;
-            $wt_products->loadProductsByIds($product_ids);
 
-            $view->rows = $wt_products->products;
-            $product_list->products = $wt_products->products;
+	        $product_ids = array_unique($product_ids);
+	        $product_list = new Productlist\ListModel();
+	        /**
+	         * @method getLoadProducts()
+	         * @var $filters array - ['products'=> $product_ids]
+	         * @var $order string
+	         * @var $order_by string
+	         * @var $limitstart int
+	         * @var $limit int
+	         * @var $listProductUpdateData bool
+	         */
+	        $products =  array_reverse($product_list->getLoadProducts(['products'=> $product_ids],'FIELD(prod.product_id, '.implode(',', $product_ids).')',null,0, 0, 1) );
+
+            $view->rows = $products;
+            $product_list->products = $products;
             $view->config->show_sort_product = '0'; //Отключаем показ фильтров и сортировки
             $view->config->show_count_select_products = '0';
-            $view->template_block_list_product = $wt_products->getTmplBlockListProduct();
-            $view->template_no_list_product = $wt_products->getTmplNoListProduct();
-            $view->template_block_form_filter = $wt_products->getTmplBlockFormFilter();
-            $view->template_block_pagination = $wt_products->getTmplBlockPagination();
+            $view->template_block_list_product = $product_list->getTmplBlockListProduct();
+            $view->template_no_list_product = $product_list->getTmplNoListProduct();
+            $view->template_block_form_filter = $product_list->getTmplBlockFormFilter();
+            $view->template_block_pagination = $product_list->getTmplBlockPagination();
             $view->count_product_to_row = $jshopConfig->count_products_to_row;
             $view->image_category_path = $jshopConfig->image_category_live_path;
             $view->noimage = $jshopConfig->noimage;
             $view->shippinginfo = \JSHelper::SEFLink($jshopConfig->shippinginfourl, 1);
-            $view->total = $wt_products->getTotal();
+
+            $view->total = $product_list->getTotal();
             $view->display_pagination = false;
             $review = \JSFactory::getTable('review');
             $view->allow_review = $review->getAllowReview();
@@ -103,4 +115,3 @@ class WtjshoppingfavoritesController extends BaseController{
         $view->display();
     }
 }
-?>

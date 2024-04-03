@@ -170,7 +170,7 @@ return new class () implements ServiceProviderInterface {
                 $type = strtoupper($type);
 
                 $html = '
-				<div class="row bg-white m-0">
+				<div class="row m-0">
 				<div class="col-12 col-md-8 p-0 pe-2">
 				<h2>' . $smile . ' ' . Text::_($element . '_AFTER_' . $type) . ' <br/>' . Text::_($element) . '</h2>
 				' . Text::_($element . '_DESC');

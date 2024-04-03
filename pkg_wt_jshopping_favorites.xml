@@ -2,7 +2,7 @@
 <extension type="package" method="upgrade">
 	<name>PKG_WT_JSHOPPING_FAVORITES</name>
 	<author>Sergey Tolkachyov</author>
-	<creationDate>March 2024</creationDate>
+	<creationDate>April 2024</creationDate>
 	<copyright>Copyright (C) 2024 Sergey Tolkachyov. All rights reserved.</copyright>
 	<packagename>wt_jshopping_favorites</packagename>
 	<version>2.0.2</version>
@@ -21,7 +21,6 @@
 	   <folder method="upgrade" type="module" id="mod_wtjshoppingfavorites" client="site">mod_wtjshoppingfavorites</folder>
 	   <folder method="upgrade" type="file" id="wtjshoppingfavorites_components_view">wtjshoppingfavorites_components_view</folder>
 	   <folder method="upgrade" type="file" id="wtjshoppingfavorites_jshopping_templates">wtjshoppingfavorites_jshopping_templates</folder>
-	   <folder method="upgrade" type="file" id="wtproducts_jshooping_model">wtproducts_jshooping_model</folder>
 	</files>
 	<updateservers>
 		<server type="extension" priority="1" name="WT JoomShopping Favorites">https://web-tolk.ru/component/swjprojects/jupdate.html?element=wt_jshopping_favorites</server>

@@ -23,19 +23,6 @@ use Joomla\Registry\Registry;
 
 class Dispatcher extends AbstractModuleDispatcher
 {
-    /**
-     * The module extension. Used to fetch the module helper.
-     *
-     * @var   ModuleInterface|null
-     * @since 1.0.0
-     */
-    private $moduleHelper;
-
-    public function __construct(\stdClass $module, CMSApplicationInterface $app, Input $input)
-    {
-        parent::__construct($module, $app, $input);
-        $this->moduleHelper = $this->app->bootModule('mod_wtjshoppingfavorites', 'site')->getHelper('WtjshoppingfavoritesHelper');
-    }
 
     /**
      * Returns the layout data.
@@ -48,16 +35,15 @@ class Dispatcher extends AbstractModuleDispatcher
     {
         $data = parent::getLayoutData();
         $app = $this->getApplication();
-
+	    $moduleHelper = $this->app->bootModule('mod_wtjshoppingfavorites', 'site')->getHelper('WtjshoppingfavoritesHelper');
         $data['moduleId'] = $data['module']->id;
         if (!empty($data['params']->get('moduleclass_sfx','')))
         {
             $data['moduleclass_sfx'] = htmlspecialchars($data['params']->get('moduleclass_sfx',''), ENT_COMPAT, 'UTF-8');
         }
-        $data['product_ids'] = $this->moduleHelper->getProductList($data['params'], $app);
+        $data['product_ids'] = $moduleHelper::getProductList($data['params'], $app);
 
-
-        $itemid = $this->moduleHelper->getItemid('com_jshopping', 'wtjshoppingfavorites');
+        $itemid = $moduleHelper->getItemid();
         if (empty($itemid))
         {
             $itemid = \JSHelper::getDefaultItemid();
