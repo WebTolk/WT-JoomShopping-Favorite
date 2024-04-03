@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <extension type="package" method="upgrade">
-	<name>WT JoomShopping Favorites</name>
+	<name>PKG_WT_JSHOPPING_FAVORITES</name>
 	<author>Sergey Tolkachyov</author>
-	<creationDate>July 2023</creationDate>
+	<creationDate>April 2024</creationDate>
+	<copyright>Copyright (C) 2024 Sergey Tolkachyov. All rights reserved.</copyright>
 	<packagename>wt_jshopping_favorites</packagename>
-	<version>2.0.1</version>
+	<version>2.0.2</version>
 	<url>https://web-tolk.ru/</url>
 	<packager>Sergey Tolkachyov</packager>
 	<packagerurl>https://web-tolk.ru/</packagerurl>
-	<description><![CDATA[	<h2>Favorite products for JoomShopping</h2> ]]></description>
+	<description>PKG_WT_JSHOPPING_FAVORITES_DESC</description>
 	<license>GNU GPL 3.0</license>
 	<scriptfile>pkg_script.php</scriptfile>
-	<languages>
-		<language tag="en-GB">language/en-GB/pkg_wt_jshopping_favorites.sys.ini</language>
-		<language tag="ru-RU">language/ru-RU/pkg_wt_jshopping_favorites.sys.ini</language>
+	<languages folder="language">
+		<language tag="en-GB">en-GB/pkg_wt_jshopping_favorites.sys.ini</language>
+		<language tag="ru-RU">ru-RU/pkg_wt_jshopping_favorites.sys.ini</language>
 	</languages>
 	<files>
-	   <file type="plugin" id="wt_jshopping_favorites">plg_wtjshoppingfavorites.zip</file>
-	   <file type="module" id="wt_jshopping_favorites" client="site">mod_wtjshoppingfavorites.zip</file>
-	   <file type="file" id="wt_jshopping_favorites">wtjshoppingfavorites_components_view.zip</file>
-	   <file type="file" id="wt_jshopping_favorites">wtjshoppingfavorites_jshopping_templates.zip</file>
-	   <file type="file" id="wt_jshopping_favorites">wtproducts_jshooping_model.zip</file>
+	   <folder method="upgrade" type="plugin" id="wtjshoppingfavorites" group="jshoppingproducts">plg_wtjshoppingfavorites</folder>
+	   <folder method="upgrade" type="module" id="mod_wtjshoppingfavorites" client="site">mod_wtjshoppingfavorites</folder>
+	   <folder method="upgrade" type="file" id="wtjshoppingfavorites_components_view">wtjshoppingfavorites_components_view</folder>
+	   <folder method="upgrade" type="file" id="wtjshoppingfavorites_jshopping_templates">wtjshoppingfavorites_jshopping_templates</folder>
 	</files>
 	<updateservers>
-			<server type="extension" name="WebTolk Update Server - WT JoomShopping Favorites">https://web-tolk.ru/component/swjprojects/jupdate.html?element=wt_jshopping_favorites</server>
+		<server type="extension" priority="1" name="WT JoomShopping Favorites">https://web-tolk.ru/component/swjprojects/jupdate.html?element=wt_jshopping_favorites</server>
 	</updateservers>
+	<changelogurl>https://web-tolk.ru/jchangelog?element=wt_jshopping_favorites</changelogurl>
 </extension>

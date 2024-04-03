@@ -1,2 +1,3 @@
 # WT-JoomShopping-Favorite
 Alternative wishlist (favorite products list) for Joomla JoomShopping
+The functionality of favorite products is implemented using cookies. As standard, the JoomShopping wish list button is displayed only in the single product view. There is no in the products list. When using various hacks to add a wish list button to the product category view, the button redirects to the product card, if the product has dependent attributes (which affect the price).
