@@ -2,7 +2,7 @@
 /**
  * WT JoomShopping Favorites is an alternative wish list (favorite products) for JoomShopping based on cookies.
  * @package     WT JoomShopping Favorite
- * @version     2.0.2
+ * @version     2.0.3
  * @Author      Sergey Tolkachyov, https://web-tolk.ru
  * @copyright   Copyright (C) 2024 Sergey Tolkachyov
  * @license     GNU/GPL 3.0
@@ -12,18 +12,17 @@
 
 namespace Joomla\Plugin\Jshoppingproducts\Wtjshoppingfavorites\Extension;
 
-// No direct access
-defined('_JEXEC') or die;
-
+use Joomla\CMS\Language\Text;
 use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\Event\Event;
 use Joomla\Event\SubscriberInterface;
 
-class Wtjshoppingfavorites extends CMSPlugin implements SubscriberInterface
+// No direct access
+\defined('_JEXEC') or die;
+
+final class Wtjshoppingfavorites extends CMSPlugin implements SubscriberInterface
 {
 	protected $autoloadlanguage = true;
-
-	protected $allowLegacyListeners = false;
 
 	public static function getSubscribedEvents(): array
 	{
@@ -42,7 +41,7 @@ class Wtjshoppingfavorites extends CMSPlugin implements SubscriberInterface
 	 *
 	 * @return void
 	 *
-	 * @throws Exception
+	 * @throws \Exception
 	 * @since 1.0.0
 	 */
 	public function onAjaxWtjshoppingfavorites(Event $event): void
@@ -132,7 +131,7 @@ class Wtjshoppingfavorites extends CMSPlugin implements SubscriberInterface
 	/**
 	 * @param $event Event event object
 	 *
-	 * @throws Exception
+	 * @throws \Exception
 	 * @since 1.0.0
 	 */
 	public function onBeforeDisplayProductListView(Event $event): void
@@ -186,7 +185,7 @@ class Wtjshoppingfavorites extends CMSPlugin implements SubscriberInterface
 	 * @throws \Exception
 	 * @since 1.3.1
 	 */
-	public function addJs(): void
+	private function addJs(): void
 	{
 		$wa = $this->getApplication()->getDocument()->getWebAssetManager();
 		$wa->registerAndUseScript('wt_jshopping_favorites_script',
@@ -197,6 +196,10 @@ class Wtjshoppingfavorites extends CMSPlugin implements SubscriberInterface
 				'defer'    => true
 			]
 		);
+		$this->getApplication()
+			->getLanguage()
+			->load('plg_jshoppingproducts_wtjshoppingfavorites', JPATH_ADMINISTRATOR);
+		Text::script('PLG_WTJSHOPPINGFAVORITES_PRODUCT_ADDED_TO_FAVORITES');
 	}
 
 	/**
@@ -253,7 +256,7 @@ class Wtjshoppingfavorites extends CMSPlugin implements SubscriberInterface
 	 *
 	 * @param $event Event event object
 	 *
-	 * @throws Exception
+	 * @throws \Exception
 	 * @since version
 	 */
 	public function onBeforeDisplaywtjshoppingfavoritesView(Event $event): void
