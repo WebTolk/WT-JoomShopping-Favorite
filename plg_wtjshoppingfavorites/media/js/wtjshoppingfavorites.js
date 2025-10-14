@@ -1,7 +1,7 @@
 /**
  * WT JoomShopping Favorites is an alternative wish list (favorite products) for JoomShopping based on coockies.
  * @package     WT JoomShopping Favorite
- * @version     2.0.2
+ * @version     2.0.3
  * @Author      Sergey Tolkachyov, https://web-tolk.ru
  * @copyright   Copyright (C) 2024 Sergey Tolkachyov
  * @license     GNU/GPL 3.0
@@ -22,12 +22,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (response !== '') {
                         let favorite = JSON.parse(response);
                         changeModuleDigit(favorite.data.added, product_id);
+                        if(favorite.data.added === true) {
+                            Joomla.renderMessages({
+                                success: [Joomla.Text._('PLG_WTJSHOPPINGFAVORITES_PRODUCT_ADDED_TO_FAVORITES')]
+                            });
+                        }
                     } else {
                         console.error(response);
                     }
                 }
             });
-        }, false);//addEventListener
+        }, false);
     });
 
     let btn_favorite_empty_list = document.getElementById('wt-jshopping-favorite-empty-list');

@@ -2,7 +2,7 @@
 /**
  * WT JoomShopping Favorites is an alternative wish list (favorite products) for JoomShopping based on cookies.
  * @package     WT JoomShopping Favorite
- * @version     2.0.2
+ * @version     2.0.3
  * @Author      Sergey Tolkachyov, https://web-tolk.ru
  * @copyright   Copyright (C) 2024 Sergey Tolkachyov
  * @license     GNU/GPL 3.0
@@ -11,11 +11,11 @@
  */
 namespace Joomla\Plugin\Jshoppingproducts\Wtjshoppingfavorites\Fields;
 
-defined('_JEXEC') or die;
-
 use Joomla\CMS\Form\Field\NoteField;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Factory;
+
+\defined('_JEXEC') or die;
 
 class PlugininfoField extends NoteField
 {
@@ -97,4 +97,3 @@ class PlugininfoField extends NoteField
         return $this->getLabel();
     }
 }
-?>

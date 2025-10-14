@@ -2,14 +2,13 @@
 /**
  * WT JoomShopping Favorites is an alternative wish list (favorite products) for JoomShopping based on cookies.
  * @package     WT JoomShopping Favorite
- * @version     2.0.2
+ * @version     2.0.3
  * @Author      Sergey Tolkachyov, https://web-tolk.ru
  * @copyright   Copyright (C) 2024 Sergey Tolkachyov
  * @license     GNU/GPL 3.0
  * @since       1.0.0
  * @link        https://web-tolk.ru/en/dev/joomshopping/wt-joomshopping-favorite
  */
-defined('_JEXEC') || die;
 
 use Joomla\CMS\Extension\PluginInterface;
 use Joomla\CMS\Factory;
@@ -18,6 +17,8 @@ use Joomla\DI\Container;
 use Joomla\DI\ServiceProviderInterface;
 use Joomla\Event\DispatcherInterface;
 use Joomla\Plugin\Jshoppingproducts\Wtjshoppingfavorites\Extension\Wtjshoppingfavorites;
+
+\defined('_JEXEC') || die;
 
 return new class implements ServiceProviderInterface {
 
